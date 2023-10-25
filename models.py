@@ -9,9 +9,7 @@ class SegModel(pl.LightningModule):
     def __init__(self):
         super(SegModel, self).__init__()
         self.learning_rate = 1e-3
-        self.net = torchvision.models.segmentation.fcn_resnet50(
-            pretrained=False, num_classes=2
-        )
+        self.net = torchvision.models.segmentation.fcn_resnet50(num_classes=2)
         self.criterion = nn.CrossEntropyLoss()
         self.evaluator = SMAPIoUMetric()
 
@@ -41,11 +39,23 @@ class SegModel(pl.LightningModule):
 
         self.evaluator.process(input={"pred": preds, "gt": mask})
 
-        self.log("loss", loss, prog_bar=True, sync_dist=True)
+        self.log(
+            "val_loss",
+            loss,
+            prog_bar=True,
+            sync_dist=True,
+            on_step=False,
+            on_epoch=True,
+        )
 
     def on_validation_epoch_end(self) -> None:
         metrics = self.evaluator.evaluate(0)
-        self.log(f"val_high_vegetation_IoU", metrics["high_vegetation__IoU"], prog_bar=True, sync_dist=True)
+        self.log(
+            f"val_high_vegetation_IoU",
+            metrics["high_vegetation__IoU"],
+            prog_bar=True,
+            sync_dist=True,
+        )
         self.log(f"val_mIoU", metrics["mIoU"], prog_bar=True, sync_dist=True)
 
     def configure_optimizers(self):

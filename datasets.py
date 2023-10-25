@@ -40,16 +40,15 @@ class SegDataModule(pl.LightningDataModule):
         self.batch_size = batch_size
 
     def setup(self, stage: str):
-        transforms = A.Compose([A.Resize(384, 384), ToTensorV2()])
         self.train = SegDataset(
             phase=self.phase,
             split="train",
-            transform=transforms,
+            transform=A.Compose([A.RandomCrop(380, 380), ToTensorV2()]),
         )
         self.valid = SegDataset(
             phase=self.phase,
             split="valid",
-            transform=transforms,
+            transform=ToTensorV2()
         )
 
     def train_dataloader(self):

@@ -2,7 +2,7 @@
 
 ```
 conda create -n ucc python=3.10
-pip install torch torchvision lightning
+pip install torch torchvision lightning albumentations
 conda activate ucc
 ```
 

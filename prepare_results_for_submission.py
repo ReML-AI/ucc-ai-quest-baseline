@@ -7,7 +7,7 @@ from utils import mask_to_rle
 
 def main():
     
-    model = SegModel.load_from_checkpoint("checkpoints/epoch=6-val_loss=0.47-val_high_vegetation_IoU=63.55-val_mIoU=66.48.ckpt")
+    model = SegModel.load_from_checkpoint("checkpoints/epoch=1-val_loss=0.68-val_high_vegetation_IoU=48.62-val_mIoU=52.77.ckpt")
     
     ds = SegDataset(phase="warmup", split="valid", transform=ToTensorV2())
     model.eval()

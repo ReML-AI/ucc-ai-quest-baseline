@@ -15,7 +15,7 @@ def main():
         save_top_k=3,
     )
 
-    trainer = pl.Trainer(max_epochs=10, callbacks=[checkpoint_callback], log_every_n_steps=10)
+    trainer = pl.Trainer(max_epochs=20, callbacks=[checkpoint_callback], log_every_n_steps=10)
 
     trainer.fit(model, datamodule=datamodule)
 

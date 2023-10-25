@@ -53,10 +53,9 @@ class SegModel(pl.LightningModule):
         self.log(
             f"val_high_vegetation_IoU",
             metrics["high_vegetation__IoU"],
-            prog_bar=True,
             sync_dist=True,
         )
-        self.log(f"val_mIoU", metrics["mIoU"], prog_bar=True, sync_dist=True)
+        self.log(f"val_mIoU", metrics["mIoU"], sync_dist=True)
 
     def configure_optimizers(self):
         return torch.optim.Adam(self.net.parameters(), lr=self.learning_rate)

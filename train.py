@@ -2,7 +2,9 @@ import lightning.pytorch as pl
 from lightning.pytorch.callbacks import ModelCheckpoint
 from datasets import SegDataModule
 from models import SegModel
+from lightning import seed_everything
 
+seed_everything(2023)
 
 def main():
     datamodule = SegDataModule(batch_size=8)

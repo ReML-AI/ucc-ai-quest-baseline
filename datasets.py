@@ -41,11 +41,13 @@ class SegDataModule(pl.LightningDataModule):
 
     def setup(self, stage: str):
         self.train = SegDataset(
+            root_dir=self.root_dir,
             phase=self.phase,
             split="train",
             transform=A.Compose([A.RandomCrop(380, 380), ToTensorV2()]),
         )
         self.valid = SegDataset(
+            root_dir=self.root_dir,
             phase=self.phase,
             split="valid",
             transform=ToTensorV2()

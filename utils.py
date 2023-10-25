@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def mask_to_rle(mask):
+def mask_to_rle(mask: np.ndarray):
     """
     Convert a binary mask to RLE format.
     :param mask: numpy array, 1 - mask, 0 - background

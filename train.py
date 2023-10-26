@@ -13,6 +13,7 @@ def main():
     checkpoint_callback = ModelCheckpoint(
         dirpath="checkpoints",
         monitor="val_high_vegetation_IoU",
+        mode="max",
         filename="{epoch}-{val_loss:.2f}-{val_high_vegetation_IoU:.2f}-{val_mIoU:.2f}",
         save_top_k=3,
     )

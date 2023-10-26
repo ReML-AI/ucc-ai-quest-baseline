@@ -16,6 +16,24 @@ def mask_to_rle(mask: np.ndarray):
     return [int(x) for x in runs]
 
 
+def mask_to_rgb(mask: np.ndarray, label_to_color: dict):
+    if not isinstance(mask, np.ndarray):
+        mask = np.array(mask)
+    mask_red = np.zeros_like(mask, dtype=np.uint8)
+    mask_green = np.zeros_like(mask, dtype=np.uint8)
+    mask_blue = np.zeros_like(mask, dtype=np.uint8)
+
+    for l in label_to_color:
+        mask_red[mask == l] = label_to_color[l][0]
+        mask_green[mask == l] = label_to_color[l][1]
+        mask_blue[mask == l] = label_to_color[l][2]
+
+    mask_colors = np.stack([mask_red, mask_green, mask_blue], dtype=np.uint8).transpose(
+        1, 2, 0
+    )
+    return mask_colors
+
+
 def show_in_grid(
     images: List[np.ndarray],
     num_rows,

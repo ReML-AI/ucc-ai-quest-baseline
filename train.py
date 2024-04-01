@@ -15,7 +15,7 @@ def main():
         monitor="val_high_vegetation_IoU",
         mode="max",
         filename="{epoch}-{val_loss:.2f}-{val_high_vegetation_IoU:.2f}-{val_mIoU:.2f}",
-        save_top_k=3,
+        save_top_k=3
     )
 
     trainer = pl.Trainer(max_epochs=20, callbacks=[checkpoint_callback], log_every_n_steps=10)

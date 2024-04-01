@@ -7,9 +7,9 @@ from utils import mask_to_rle
 
 def main():
     
-    model = SegModel.load_from_checkpoint("checkpoints/epoch=4-val_loss=0.45-val_high_vegetation_IoU=65.14-val_mIoU=66.81.ckpt")
+    model = SegModel.load_from_checkpoint("checkpoints/epoch=17-val_loss=0.31-val_high_vegetation_IoU=77.51-val_mIoU=76.09.ckpt")
     
-    ds = SegDataset(phase="warmup", split="valid", transform=ToTensorV2())
+    ds = SegDataset(phase="public", split="test", transform=ToTensorV2())
     model.eval()
     results = {}
     for i, batch in enumerate(ds):
